@@ -31,11 +31,21 @@ namespace asyncawait
             return count;
         }
 
-        private void btnShowResult_Click(object sender, EventArgs e)
+        private async void btnShowResult_Click(object sender, EventArgs e)
         {
+            //Task keyword is means an unit of task....
+            Task<int> task = new Task<int>(CountCharacters);
+            task.Start();
             lblCount.Text = "Processing File, please wait";
-            int count = CountCharacters();
+            //when till this done we will wait for the task.. so we used await keaword
+            int count = await task;
             lblCount.Text = count.ToString() + "characters in file";
+
+
+
+
+
+            //Note: If we dont use async await, when we first run the project and click on show as long as process not comple we cannot move the window form.
 
         }
     }
